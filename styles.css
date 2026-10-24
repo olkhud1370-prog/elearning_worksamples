@@ -513,3 +513,6 @@ header nav a,
 @media (prefers-reduced-motion: reduce){
   .launch > span[aria-hidden="true"]{ transition:none; }
 }
+
+/* Related course deliverables */
+.project-links { display:flex; flex-wrap:wrap; align-items:center; column-gap:28px; row-gap:4px; }
