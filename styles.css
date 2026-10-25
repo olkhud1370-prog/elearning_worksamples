@@ -3,15 +3,15 @@
    (v11 to v14 override layers merged) with a single shared content edge. */
 
 :root {
-  --chalk: #f3f5f8;
+  --chalk: #f7f6f3;
   --white: #ffffff;
-  --ink: #171821;
-  --graphite: #565b68;
-  --mist: #e9edf4;
-  --cobalt: #5357c9;
-  --cobalt-dark: #3f43aa;
-  --navy: #2d3460;
-  --line: #dce1e9;
+  --ink: #25262b;
+  --graphite: #62666d;
+  --mist: #ecebf5;
+  --cobalt: #4d4a8a;
+  --cobalt-dark: #3d3a70;
+  --navy: #35324f;
+  --line: #d9d8d4;
 
   --max: 1120px;
   --gutter: clamp(22px, 4vw, 30px);
@@ -316,7 +316,7 @@ h1{
     to bottom,
     rgba(243,245,248,0) 0%,
     rgba(243,245,248,.42) 58%,
-    #f3f5f8 100%
+    #f7f6f3 100%
   );
 }
 
@@ -329,7 +329,7 @@ h1{
 
 /* V18: quieter hero artwork */
 .hero{
-  background:#f3f5f8;
+  background:var(--chalk);
 }
 .hero-art-image{
   left:auto;
@@ -344,7 +344,7 @@ h1{
 }
 .hero::after{
   height:42px;
-  background:linear-gradient(to bottom,rgba(243,245,248,0),#f3f5f8 100%);
+  background:linear-gradient(to bottom,rgba(243,245,248,0),#f7f6f3 100%);
 }
 
 @media(max-width:900px){
@@ -424,7 +424,7 @@ header nav a,
 /* V21: seamless hero */
 .hero{
   border:0 !important;
-  background:#f3f5f8 !important;
+  background:var(--chalk) !important;
 }
 
 /* Let the artwork reach the browser's right edge instead of ending
@@ -452,7 +452,7 @@ header nav a,
   display:none !important;
 }
 .hero{
-  background:#f3f5f8 !important;
+  background:var(--chalk) !important;
   border:0 !important;
 }
 
@@ -534,3 +534,43 @@ header nav a,
 .deliverable-course a:focus-visible, .deliverable-document:focus-visible { outline:3px solid var(--cobalt); outline-offset:3px; }
 @media (max-width:420px) { .deliverable { padding:13px; gap:12px; } .document-preview,.deliverable-icon { width:48px; } }
 @media (prefers-reduced-motion:reduce) { .deliverable-document { transition:none; } }
+
+/* V29: supporting artifacts sit below the course screenshot */
+.project-media { display:flex; flex-direction:column; gap:18px; min-width:0; align-self:start; }
+.project.reverse .project-media { order:-1; }
+.project-media > .project-image { display:block; width:100%; }
+.project-media > .deliverable-document { width:100%; box-sizing:border-box; }
+@media (max-width:820px) {
+  .project .project-media { order:-1; }
+}
+
+/* V30: project overview above a full-width deliverables row */
+.project { align-items:start; row-gap:24px; }
+.project > .project-copy { grid-column:1; grid-row:1; }
+.project > .project-media { grid-column:2; grid-row:1; order:initial; }
+.project.reverse > .project-media { grid-column:1; grid-row:1; order:initial; }
+.project.reverse > .project-copy { grid-column:2; grid-row:1; }
+.project > .deliverables {
+  grid-column:1 / -1; grid-row:2;
+  display:grid; grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:18px; margin-top:0; align-items:stretch;
+}
+.project > .deliverables > .deliverable { width:100%; box-sizing:border-box; min-height:112px; }
+.project > .deliverables > .deliverable-document { display:flex; }
+@media (max-width:820px) {
+  .project > .project-copy, .project.reverse > .project-copy { grid-column:1; grid-row:2; }
+  .project > .project-media, .project.reverse > .project-media { grid-column:1; grid-row:1; order:initial; }
+  .project > .deliverables { grid-column:1; grid-row:3; }
+}
+@media (max-width:560px) {
+  .project > .deliverables { grid-template-columns:1fr; gap:12px; }
+}
+
+/* V31: warm editorial / refined indigo theme. Layout intentionally unchanged. */
+.hero { background:var(--chalk) !important; }
+.learning-strip { background:var(--mist); }
+.deliverable-course { background:#f7f6f3; border-color:var(--line); }
+.deliverable-document { background:var(--white); border-color:var(--line); }
+.deliverable-icon, .document-preview { border-color:var(--line); }
+.contact .label { color:#e2e0f4; }
+.contact p:not(.label) { color:#eeedf8; }
